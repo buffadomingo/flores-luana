@@ -394,12 +394,13 @@ const heartSVG = c => `<svg viewBox="0 0 24 24"><path fill="${c}" d="${HEART}"/>
 
 /* ---------- gatitos ---------- */
 (function cats(){
-  const face = (fur, light, ear, stripes='') => `<svg viewBox="0 0 100 92">
+  const face = (fur, light, ear, stripes='', iris='', extra='') => `<svg viewBox="0 0 100 92">
     <path d="M16 40 L14 6 L42 24 Z" fill="${fur}"/><path d="M84 40 L86 6 L58 24 Z" fill="${fur}"/>
     <path d="M20 32 L19 14 L34 25 Z" fill="${ear}"/><path d="M80 32 L81 14 L66 25 Z" fill="${ear}"/>
     <ellipse cx="50" cy="52" rx="40" ry="35" fill="${fur}"/>${stripes}
     <ellipse cx="50" cy="66" rx="19" ry="14" fill="${light}"/>
-    <ellipse cx="35" cy="48" rx="6" ry="7.5" fill="#1d1a14"/><ellipse cx="65" cy="48" rx="6" ry="7.5" fill="#1d1a14"/>
+    ${iris ? `<ellipse cx="35" cy="48" rx="7.5" ry="8" fill="${iris}"/><ellipse cx="65" cy="48" rx="7.5" ry="8" fill="${iris}"/>` : ''}
+    <ellipse cx="35" cy="48" rx="${iris?3.2:6}" ry="7.5" fill="#1d1a14"/><ellipse cx="65" cy="48" rx="${iris?3.2:6}" ry="7.5" fill="#1d1a14"/>${extra}
     <circle cx="37" cy="45.5" r="2.2" fill="#fff"/><circle cx="67" cy="45.5" r="2.2" fill="#fff"/>
     <path d="M45.5 59 L54.5 59 L50 64 Z" fill="#ff8fb1"/>
     <path d="M50 64 Q46 70 41 67 M50 64 Q54 70 59 67" fill="none" stroke="#3a2a2a" stroke-width="1.6" stroke-linecap="round"/>
@@ -407,8 +408,14 @@ const heartSVG = c => `<svg viewBox="0 0 24 24"><path fill="${c}" d="${HEART}"/>
   </svg>`;
   const tiger = '<path d="M50 18 L50 30 M40 20 L42 30 M60 20 L58 30" stroke="#c8641a" stroke-width="4" stroke-linecap="round"/>'
               + '<path d="M11 50 L22 52 M12 58 L22 58 M89 50 L78 52 M88 58 L78 58" stroke="#c8641a" stroke-width="3.4" stroke-linecap="round"/>';
+  // kito: atigrado gris pardo, "M" en la frente, rayas en mejillas, ojos verde-amarillo, collar azul
+  const tabby = '<path d="M36 22 L40 34 L50 26 L60 34 L64 22" fill="none" stroke="#3a322b" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>'
+              + '<path d="M50 30 L50 38 M43 20 L44 27 M57 20 L56 27" stroke="#3a322b" stroke-width="3" stroke-linecap="round"/>'
+              + '<path d="M11 48 L23 50 M12 56 L23 56 M13 64 L24 62 M89 48 L77 50 M88 56 L77 56 M87 64 L76 62" stroke="#3a322b" stroke-width="3" stroke-linecap="round"/>'
+              + '<path d="M28 40 Q35 37 42 40 M58 40 Q65 37 72 40" fill="none" stroke="#3a322b" stroke-width="2" stroke-linecap="round"/>';
+  const collar = '<path d="M24 80 Q50 92 76 80" fill="none" stroke="#2f6fd6" stroke-width="5" stroke-linecap="round"/>';
   const CATS = [
-    {name:'kito',  svg:face('#1f1d24','#9a9ca6','#6e7080'), path:'wanderA', dur:34, dl:0},
+    {name:'kito',  svg:face('#7d7266','#d8cdbd','#d9a39c', tabby, '#b8b450', collar), path:'wanderA', dur:34, dl:0},
     {name:'pufli', svg:face('#8d929c','#d6d9de','#f2b6c6'), path:'wanderB', dur:38, dl:-12},
     {name:'mushu', svg:face('#f0913a','#ffe2bf','#ffb78a', tiger), path:'wanderC', dur:36, dl:-22},
   ];
